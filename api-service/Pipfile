@@ -8,11 +8,13 @@ verify_ssl = true
 [packages]
 uvicorn = "*"
 fastapi = "*"
-tensorflow = "*"
 pandas = "*"
-tensorflow-hub = "*"
 python-multipart = "*"
 albumentations = "==1.0.0"
+tensorflow-hub = "*"
+tensorflow-macos = "<2.6"
+tensorflow-metal = "*"
+
 
 [requires]
 python_version = "3.8"

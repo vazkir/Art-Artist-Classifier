@@ -18,7 +18,9 @@ export SECRETS_DIR=$(pwd)/../secrets/
 
 
 # Build the image based on the Dockerfile
-docker build -t $IMAGE_NAME -f Dockerfile .
+# FIX M1 MAC: Need amd64 arch because a lot of pip wheels not supported by default m1
+# https://til.simonwillison.net/macos/running-docker-on-remote-m1
+docker build -t $IMAGE_NAME --platform=linux/amd64 -f Dockerfile .
 
 # Run the container
 # --mount: Attach a filesystem mount to the container

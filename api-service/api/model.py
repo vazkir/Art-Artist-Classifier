@@ -7,6 +7,7 @@ from tensorflow.keras.models import Model
 import tensorflow_hub as hub
 import albumentations as A
 from functools import partial
+from api.local import RUN_LOCAL
 
 
 AUTOTUNE = tf.data.experimental.AUTOTUNE
@@ -30,6 +31,13 @@ artist_label = ['Albrecht_Durer', 'Alfred_Sisley', 'Amedeo_Modigliani', 'Andrei_
                 'Salvador_Dali', 'Sandro_Botticelli', 'Titian', 'Vasiliy_Kandinskiy', 'Vincent_van_Gogh', 'William_Turner']
 
 project_path = 'C:/Users/Lei/Desktop/Fall2021/AP215_advanced_practical_data_science/exercise/exercise6/artist-application'
+
+
+# Exception for when running this wihtouth docker on an M1 mac locally
+if RUN_LOCAL:
+    # Pyenv root is inside this folder
+    path_persis_exper =  "../../persistent-folder/experiments"
+    local_experiments_path = os.path.join(os.path.dirname(__file__),path_persis_exper)
 
 
 def load_prediction_model():

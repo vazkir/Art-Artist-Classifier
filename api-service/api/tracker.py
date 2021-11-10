@@ -7,11 +7,25 @@ import pandas as pd
 
 import tensorflow as tf
 from google.cloud import storage
+from dotenv import load_dotenv
+from api.local import RUN_LOCAL
 
-
-gcp_project = os.environ["GCP_PROJECT"]
 bucket_name = "ac215-mushroom-app-models-small"
 local_experiments_path = "/persistent/experiments"
+
+
+# Exception for when running this wihtouth docker on an M1 mac locally
+if RUN_LOCAL:
+    load_dotenv()   
+    # Pyenv root is inside this folder
+    path_persis_exper =  "../../persistent-folder/experiments"
+    local_experiments_path = os.path.join(os.path.dirname(__file__),path_persis_exper)
+
+    path_secrets = "../../secrets/bucket-reader.json"
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(os.path.dirname(__file__),path_secrets)
+
+gcp_project = os.environ["GCP_PROJECT"]
+
 
 # Setup experiments folder
 if not os.path.exists(local_experiments_path):
